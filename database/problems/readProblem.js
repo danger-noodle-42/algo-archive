@@ -19,7 +19,6 @@ const readProblem = async (req, res, next) =>{
   }
   catch (e){
     res.locals.successful = false;
-    
     return next();
   }
 }

@@ -12,7 +12,6 @@ const deleteProblem = async (req, res, next) =>{
   }
   catch (e){
     res.locals.successful = false;
-    
     return next();
   }
 };

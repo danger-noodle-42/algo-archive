@@ -15,7 +15,6 @@ const createProblem = async (req, res, next) =>{
   }
   catch (e){
     res.locals.successful = false;
-    console.log(e);
     return next();
   }
 }
