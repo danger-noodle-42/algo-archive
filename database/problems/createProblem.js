@@ -1,9 +1,23 @@
-const createProblem = (req, res, next) =>{
-  res.locals.successful = true;
-  // INSERT INTO problems (title, description, solution, comments)
-  // VALUES ('Initial Title Test', 'Description from DB', 'Solution From DB', 'comments from DB');
+const db = require('../model')
 
-  return next();
+const createProblem = async (req, res, next) =>{
+  try {
+    const { title, description, solution, comments} = req.body;
+  
+    const queryString = `
+    INSERT INTO problems (title, description, solution, comments)
+    VALUES ('${title}', '${description}', '${solution}', '${comments}');`;
+
+    await db.query(queryString);
+    res.locals.successful = true;
+    
+    return next();
+  }
+  catch (e){
+    res.locals.successful = false;
+    console.log(e);
+    return next();
+  }
 }
 
 module.exports = createProblem;

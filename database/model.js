@@ -1,7 +1,8 @@
 const { Pool } = require('pg');
+const { dbConnection } = require('./sensitive');
 
 const pool = new Pool({
-  connectionString: PG_URI
+  connectionString: dbConnection
 });
 
 module.exports = {
