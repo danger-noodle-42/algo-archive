@@ -1,5 +1,9 @@
 const db = require('../model')
 
+//Expects no input data
+
+//Outputs data in res.locals.successful, and 
+//res.locals.problemTitles of format [name1, name2, ...]
 const readProblemTitles = async (req, res, next) => {
   try {
     const queryString = `

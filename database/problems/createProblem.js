@@ -1,5 +1,9 @@
 const db = require('../model')
 
+//Expects data in req.body
+//of format { title, description, soution, comments }
+
+//Outputs data in res.locals.successful
 const createProblem = async (req, res, next) =>{
   try {
     const { title, description, solution, comments} = req.body;

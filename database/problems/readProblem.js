@@ -1,5 +1,10 @@
 const db = require('../model')
 
+//Expects data in req.body
+//of format { title }
+
+//Outputs data in res.locals.successful, and 
+//res.locals.problem of format { title, description, soution, comments }
 const readProblem = async (req, res, next) =>{
   try {
     const queryString = `

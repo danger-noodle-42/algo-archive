@@ -1,5 +1,9 @@
 const db = require('../model')
 
+//Expects data in req.body
+//of format { title }
+
+//Outputs data in res.locals.successful
 const deleteProblem = async (req, res, next) =>{
   try {
     const queryString = `
