@@ -1,1 +1,7 @@
 node_modules
+<<<<<<< HEAD
+=======
+build/*.js
+npm-debug.log
+.DS_Store
+>>>>>>> dev
