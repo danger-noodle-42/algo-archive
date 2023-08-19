@@ -1,11 +1,11 @@
 import CodeViewer from './components/CodeViewer';
-import QuestionList from './components/QuestionList';
+import QuestionsList from './components/QuestionsList';
 
 function App() {
   return (
     <div>
       <CodeViewer value="tbu"/>
-      <QuestionList value="tbu"/>
+      <QuestionsList value="tbu"/>
     </div>
   )
 }
