@@ -1,0 +1,19 @@
+{
+  "name": "algo-archive",
+  "version": "0.1.0",
+  "description": "Save and review your favorite algorithm questions",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Red-lipped-Batfish42/algo-archive.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Red-lipped-Batfish42/algo-archive/issues"
+  },
+  "homepage": "https://github.com/Red-lipped-Batfish42/algo-archive#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
