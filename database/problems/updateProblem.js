@@ -1,5 +1,5 @@
 const updateProblem = (req, res, next) =>{
-    req.locals.successful = true;
+    res.locals.successful = true;
   
     return next();
   }
