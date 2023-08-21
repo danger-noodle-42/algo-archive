@@ -12,10 +12,19 @@ router.post('/createProblem', allActions.createProblem, (req, res) => {
   }
 });
 
-router.get('/readProblem', allActions.readProblem, (req, res) => {
+router.post('/readProblem', allActions.readProblem, (req, res) => {
   const { problem } = res.locals;
   if (problem) {
     res.status(200).json(problem);
+  } else {
+    res.status(400).json({ error: 'Error reading problem' });
+  }
+});
+
+router.get('/listProblems', allActions.readProblemTitles, (req, res) => {
+  const { problemTitles } = res.locals;
+  if (problemTitles) {
+    res.status(200).json({ titles: problemTitles });
   } else {
     res.status(400).json({ error: 'Error reading problem' });
   }
