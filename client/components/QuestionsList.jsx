@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import '../style.css';
 import TitleCard from './TitleCard.jsx';
+import '../style.css';
+import './QuestionsList.css';
+
 
 const QuestionsList = (props) => {
   const { title, titleCards, handleDeleteClick, handleAccessDataClick } = props;
@@ -20,5 +22,6 @@ const QuestionsList = (props) => {
       ))}
     </div>
   );
-}
+};
+
 export default QuestionsList;

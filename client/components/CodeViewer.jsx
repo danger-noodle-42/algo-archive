@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import '../style.css';
+import './CodeViewer.css';
 
 const CodeViewer = ((props) => {
 
@@ -21,7 +22,7 @@ const CodeViewer = ((props) => {
 
     <label className='question'>
       Challenge Question:
-      <input
+      <textarea
       type='text'
       value={description}
       onChange={(e) => setDescription(e.target.value)}
@@ -31,7 +32,7 @@ const CodeViewer = ((props) => {
 
     <label className='solution'>
       Challenge Solution:
-      <input
+      <textarea
       type='text'
       value={solution}
       onChange={(e) => setSolution(e.target.value)}
@@ -41,7 +42,7 @@ const CodeViewer = ((props) => {
 
     <label className='comments'>
       Comments:
-      <input
+      <textarea
       type='text'
       value={comments}
       onChange={(e) => setComments(e.target.value)}

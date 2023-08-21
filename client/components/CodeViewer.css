@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+textarea {
+  height: 100%;
+  width: calc(100% - 10px);
+  resize: none;
+  font-family: 'Source Code Pro', monospace;
+  padding: 5px;
+  border-width: 1px;
+  border-radius: 15px;
+  transition: border-radius 1s;
+
+  box-shadow: 0px 0px 0px 0px #000000;
+}
+textarea:focus {
+  border-width: 1px;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 0px 0px 15px -9px #000000;
+
+  transition: box-shadow border-radius 1s;
+}
+
+
+.codeViewer {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.codeViewer  > * {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.codeViewer > .question {
+  flex-grow: 5;
+}
+.codeViewer > .solution {
+  flex-grow: 5;
+}
+.codeViewer > .comments {
+  flex-grow: 5;
+}
+.codeViewer > * > input {
+  height: 100%;
+  vertical-align: text-top;
+}
+
+.codeViewer > .buttons {
+  display: flex;
+  flex-direction: row;
+}
+.codeViewer > .buttons > * {
+  flex-grow: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+}
