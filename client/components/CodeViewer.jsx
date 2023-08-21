@@ -1,17 +1,15 @@
 import React from 'react';
+import { useState } from 'react';
+import '../style.css';
 
-const CodeViewer = ((props) => (
+const CodeViewer = ((props) => {
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [solution, setSolution] = useState('');
-  const [notes, setNotes] = useState('');
+  const { title, description, solution, notes, handleDeleteClick, handleAddTitle } = props;
 
-  const {deleteProblemData, postProblemData, patchProblemData} = props;
-
+  return (
   //Unloaded Blank page
   <div className='codeViewer'>
-    <form onSubmit={patchProblemData}>
+    <form onSubmit={handleAddTitle}>
       <label>
         Challenge Title:
         <input
@@ -51,11 +49,12 @@ const CodeViewer = ((props) => (
         />
       </label>
       <br />
-      <button type='?' className="discard" title ={'' onClick{deleteProblemData}}> Discard </button>
+      <button className="discard" title ={title} onClick={handleDeleteClick}> Discard </button>
       <button type='submit'>Submit</button>
     </form>
   </div>
-)
+  )
+}
 );
 
 export default CodeViewer;
