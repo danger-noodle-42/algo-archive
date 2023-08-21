@@ -21,7 +21,7 @@ module.exports = {
         },
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.s?css$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../client/index.html'),
+      template: path.resolve(__dirname, './client/index.html'),
     }),
   ],
 };
