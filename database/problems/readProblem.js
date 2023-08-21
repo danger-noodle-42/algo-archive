@@ -9,7 +9,7 @@ const readProblem = async (req, res, next) => {
   try {
     const queryString = `
     SELECT * FROM problems WHERE title=$1;`;
-
+    
     let result = await db.query(queryString, [req.body.title]);
     result = result.rows[0];
 

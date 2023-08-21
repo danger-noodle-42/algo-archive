@@ -1,13 +1,16 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const cors = require('cors');
 
 const apiRouter = require('./routes/api');
 
 const PORT = 3000;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 app.use('/api', apiRouter);
 

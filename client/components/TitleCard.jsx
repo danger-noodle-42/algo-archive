@@ -5,11 +5,14 @@ function TitleCard(props) {
   const { title, handleDeleteClick, handleAccessDataClick } = props;
 
   return (
+    <div className='title-Card'>
     <button className='title-button' title={title} onClick={handleAccessDataClick}>
-      <button className='delete-button' title={title} onClick={handleDeleteClick}>
-        <DeleteIcon />
-      </button>
+      {title}
     </button>
+    <button className='delete-button' title={title} onClick={handleDeleteClick}>
+      X
+    </button>
+  </div>
   );
   // {
   //   title: 'user input',
