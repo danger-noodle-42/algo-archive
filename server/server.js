@@ -2,15 +2,16 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const apiRouter = require('./routes/api');
 
 const PORT = 3000;
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 app.use('/api', apiRouter);
 // catch-all route handler for any requests to an unknown route

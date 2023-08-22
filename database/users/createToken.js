@@ -8,8 +8,11 @@ const createToken = (req, res, next) => {
   const { username } = res.locals;
   try {
     // search db for username and return the user obj
-    // use jwt.sign to sign user object with secret
+    let user;
+    // use jwt.sign to sign user object with secret and store in const token
+    const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN);
     // create cookie with jwt
+    res.cookie('token', token)
     // redirect to home page?
   }
   catch (err) {
