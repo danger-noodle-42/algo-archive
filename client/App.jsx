@@ -22,6 +22,25 @@ const App = () => {
       console.error('Error fetching titles: ', error);
     }
   };
+
+  const handleQuestionUpdate = (field, value) => {
+    switch(field) {
+      case 'title':
+        setTitle(value);
+        break;
+      case 'description':
+        setDescription(value);
+        break;
+      case 'solution':
+        setSolution(value);
+        break;
+      case 'comments':
+        setComments(value);
+        break;
+      default:
+        break;
+    }
+  }
   
   //FUNCTION THAT ACCESSES DATA
 
@@ -125,7 +144,16 @@ const App = () => {
   return (
     <div className='App'>
       <QuestionsList value="tbu" title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards}/>
-      <CodeViewer value="tbu" title={title} description={description} solution={solution} comments ={comments} handleClear = {handleClear} handleAccessDataClick={handleAccessDataClick} setTitle={setTitle} setDescription={setDescription} setSolution={setSolution} setComments={setComments} handleAddTitle={handleAddTitle}/>
+      <CodeViewer
+        title={title}
+        description={description}
+        solution={solution}
+        comments ={comments}
+        handleClear={handleClear}
+        handleAccessDataClick={handleAccessDataClick}
+        onChange={handleQuestionUpdate}        
+        handleAddTitle={handleAddTitle}
+      />
       <img 
       // src={require('./components/batfish.jpg')}
       // src = {logo}
