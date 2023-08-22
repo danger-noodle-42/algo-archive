@@ -10,7 +10,7 @@ const createUser = (req, res, next) => {
     bcrypt.hash(password, saltRounds, (err, hash) => {
       if (err) {
         console.log(err);
-        return next(err); // Call next with error parameter
+        return next(err);
       }
       // insert into db
       const queryString =
@@ -18,17 +18,20 @@ const createUser = (req, res, next) => {
       const values = [username, hash];
       db.query(queryString, values)
         .then(() => {
-          return next(); // Call next after successful insertion
+          // store username on locals
+          res.locals.username = username;
+          // Call next after successful insertion
+          return next();
         })
         .catch(error => {
           console.log(error);
-          return next(error); // Call next with error parameter
+          return next(error);
         });
     });
   } catch (err) {
     // error handling
     console.log(err);
-    return next(err); // Call next with error parameter
+    return next(err); 
   }
 };
 
