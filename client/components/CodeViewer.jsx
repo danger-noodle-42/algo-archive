@@ -2,53 +2,65 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import '../style.css';
 import './CodeViewer.css';
+import styled from '@emotion/styled';
+
+// this seems to be the code to handle the form in the middle of the page. We are passing the props(objects)
+// from App.jsx here to be able to render the functionality
+
+const TextArea = styled.textarea``;
+const Input = styled.input``;
 
 const CodeViewer = ((props) => {
 
-  const { title, description, solution, comments, setTitle, setDescription, setSolution, setComments, handleClear, handleDeleteClick, handleAddTitle } = props;
+  const {
+    comments,
+    description,
+    handleClear,
+    handleAddTitle,
+    onChange,
+    solution,
+    title,    
+  } = props;
+
+  // rendering the handleAddTitle function on onSubmit handler passing the title of the question as the value
+  // uptading the setTitle state when user clicks button
 
   return (
-  //Unloaded Blank page
+  // Unloaded Blank page
   <form onSubmit={handleAddTitle} className='codeViewer'>
     <label className='title'>
-      Challenge Title:
-      <input
-      type='text'
-      value={title}
-      onChange={(e) => setTitle(e.target.value)}
+      Challenge Title
+      <Input
+        type='text'
+        value={title}
+        onChange={(e) => onChange('title', e.target.value)}
       />
     </label>
-    <br />
 
     <label className='question'>
-      Challenge Question:
-      <textarea
-      type='text'
-      value={description}
-      onChange={(e) => setDescription(e.target.value)}
+      Challenge Question
+      <TextArea
+        value={description}
+        onChange={(e) => onChange('description', e.target.value)}
       />
     </label>
-    <br />
 
     <label className='solution'>
-      Challenge Solution:
-      <textarea
-      type='text'
-      value={solution}
-      onChange={(e) => setSolution(e.target.value)}
+      Challenge Solution
+      <TextArea
+        value={solution}
+        onChange={(e) => onChange('solution', e.target.value)}
       />
     </label>
-    <br />
 
     <label className='comments'>
-      Comments:
-      <textarea
-      type='text'
-      value={comments}
-      onChange={(e) => setComments(e.target.value)}
+      Comments
+      <TextArea
+        value={comments}
+        onChange={(e) => onChange('comments', e.target.value)}
       />
     </label>
-    <br />
+
     <div className='buttons'>
       <button className="clear" title={title} onClick={handleClear}> Clear </button>
       <button type='submit'>Submit</button>
