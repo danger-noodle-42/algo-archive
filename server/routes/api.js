@@ -48,4 +48,23 @@ router.delete('/deleteProblem', allActions.deleteProblem, (req, res) => {
   }
 });
 
+
+// post request to '/signup'
+router.post('/signup', allActions.createUser, allActions.createToken, (req, res) => {
+  // will invoke create user and createToken
+
+})
+
+// post request to '/login'
+router.post('/login', allActions.verifyUser, allActions.createToken, (req, res) => {
+  // will invoke verify user and createToken
+
+})
+
+// delete request to '/logout
+router.delete('/logout', allActions.deleteToken, (req, res) => {
+  // will invoke deleteToken
+})
+
+
 module.exports = router;
