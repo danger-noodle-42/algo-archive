@@ -1,14 +1,24 @@
-const bcrypt = require('bcrypt');
+
+var jwt = require('jsonwebtoken')
+require('dotenv').config();
 
 const verifyToken = (req, res, next) => {
   // pull token cookie off header and store in const token
+  const { token } = req.cookies;
   try {
     // use jwt verify to check if token is valid
-    // if valid, give access to page
-    // else, redirect to login page
+    jwt.verify(token, process.env.ACCESS_SECRET_TOKEN, (err, success) => {
+      if (err) {
+        console.log(err);
+        return next(err)
+      }
+      // if valid, give access to page
+      return next()
+    });
   } catch (err) {
     // error handling
     console.log(err);
+    return next(err);
   }
 };
 
