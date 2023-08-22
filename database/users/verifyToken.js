@@ -13,6 +13,8 @@ const verifyToken = (req, res, next) => {
         return next(err)
       }
       // if valid, give access to page
+      // store success on locals
+      res.locals.success = true;
       return next()
     });
   } catch (err) {

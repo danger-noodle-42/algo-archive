@@ -16,6 +16,10 @@ const createToken = async (req, res, next) => {
     const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN);
     // create cookie with jwt
     res.cookie('token', token)
+    // store success on locals
+    res.locals.success = true;
+    // move to next
+    return next()
   }
   catch (err) {
     // error handling

@@ -4,6 +4,8 @@ const deleteToken = (req, res, next) => {
   try {
     // use res.clearCookie to delete cookie
     res.clearCookie('token');
+    // store success on locals
+    res.locals.success = true;
     // return next()
     return next();
   } catch (err) {

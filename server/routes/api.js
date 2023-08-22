@@ -3,7 +3,7 @@ const allActions = require('../../database/allActions');
 
 const router = express.Router();
 
-router.post('/createProblem', allActions.createProblem, (req, res) => {
+router.post('/createProblem', allActions.createProblem, allActions.verifyToken, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });
@@ -12,7 +12,7 @@ router.post('/createProblem', allActions.createProblem, (req, res) => {
   }
 });
 
-router.post('/readProblem', allActions.readProblem, (req, res) => {
+router.post('/readProblem', allActions.readProblem, allActions.verifyToken, (req, res) => {
   const { problem } = res.locals;
   if (problem) {
     res.status(200).json(problem);
@@ -21,7 +21,7 @@ router.post('/readProblem', allActions.readProblem, (req, res) => {
   }
 });
 
-router.get('/listProblems', allActions.readProblemTitles, (req, res) => {
+router.get('/listProblems', allActions.readProblemTitles, allActions.verifyToken, (req, res) => {
   const { problemTitles } = res.locals;
   if (problemTitles) {
     res.status(200).json({ titles: problemTitles });
@@ -30,7 +30,7 @@ router.get('/listProblems', allActions.readProblemTitles, (req, res) => {
   }
 });
 
-router.patch('/updateProblem', allActions.updateProblem, (req, res) => {
+router.patch('/updateProblem', allActions.updateProblem, allActions.verifyToken, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });
@@ -39,7 +39,7 @@ router.patch('/updateProblem', allActions.updateProblem, (req, res) => {
   }
 });
 
-router.delete('/deleteProblem', allActions.deleteProblem, (req, res) => {
+router.delete('/deleteProblem', allActions.deleteProblem, allActions.verifyToken, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });
@@ -51,19 +51,34 @@ router.delete('/deleteProblem', allActions.deleteProblem, (req, res) => {
 
 // post request to '/signup'
 router.post('/signup', allActions.createUser, allActions.createToken, (req, res) => {
-  // will invoke create user and createToken
-  
+  const { successful } = res.locals;
+  if (successful) {
+    res.status(200).json({ successful });
+  } else {
+    res.status(400).json({ error: 'Error creating user' });
+  }
+
 })
 
 // post request to '/login'
-router.post('/login', allActions.verifyUser, allActions.createToken, (req, res) => {
-  // will invoke verify user and createToken
+router.post('/login', allActions.verifyUser, allActions.createToken, allActions.verifyToken, (req, res) => {
+  const { successful } = res.locals;
+  if (successful) {
+    res.status(200).json({ successful });
+  } else {
+    res.status(400).json({ error: 'Error verifying user' });
+  }
 
 })
 
 // delete request to '/logout
 router.delete('/logout', allActions.deleteToken, (req, res) => {
-  // will invoke deleteToken
+  const { successful } = res.locals;
+  if (successful) {
+    res.status(200).json({ successful });
+  } else {
+    res.status(400).json({ error: 'Error logging out' });
+  }
 })
 
 

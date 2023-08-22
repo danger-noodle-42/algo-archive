@@ -18,6 +18,8 @@ const createUser = (req, res, next) => {
       const values = [username, hash];
       db.query(queryString, values)
         .then(() => {
+          // store success on locals
+          res.locals.success = true;
           // store username on locals
           res.locals.username = username;
           // Call next after successful insertion
