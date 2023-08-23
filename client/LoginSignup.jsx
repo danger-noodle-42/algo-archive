@@ -24,31 +24,62 @@ const Logo = styled.img`
   width: 300px;
   background-color: red;
 `;
-const Tagline = styled.div``;
+const Tagline = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  color: #25559B;
+  `;
 
-const LoginOrSignUp = () => {
-  const [isLogin, setIsLogin] = useState(true);
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  border-radius: 10px;
+  boxing-sizing: border-box;
+  width: inherit;
+  height: 100px;
+  `;
+
+const LoginSignUp = (props) => {
+  const {logIn} = props;
   const [error, setError] = useState();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
 
-  const handleSubmit = async () => {
+  const handleLogin = async (e) => {
     // attempt to login the user in
-    const route = isLogin ? '/api/login' : '/api/signup';  // TODO: confirm the routes
-    const response = await fetch(route, { 
+    // const route = isLogin ? '/api/login' : '/api/signup';  // TODO: confirm the routes
+    e.preventDefault();
+    const response = await fetch('/api/login', { 
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
+    logIn(true)
     if (data.error) {
       setError(data.error);
     }
   }
   
-  const toggleLogin = () => {
-    setIsLogin(!isLogin);
-    setError();
-
+  const handleSignup = async (e) => {
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    const data = await response.json();
+    logIn(true);
+    if (data.error) {
+      setError(data.error);
+    }
   }
+
+
 
   return (
     <OuterContainer>
@@ -57,15 +88,16 @@ const LoginOrSignUp = () => {
         <div>
           <Tagline>Keeping you organized since 2023</Tagline>
           <>
-            <form onSubmit={handleSubmit}>
-              <input value={isLogin} type="text" placeholder="Username" />
+            <Form>
+              <input value={username} type="text" placeholder="Username" />
               <br />
-              <input value={isLogin} type="password" placeholder="*******" />
-            </form>
-            <Button onClick={() => setIsLogin(!isLogin)}>{isLogin ? 'Login' : 'Sign Up'}</Button>
+              <input value={password} type="password" placeholder="*******" />
+            </Form>
+            <br />
+            <Button onClick={handleLogin}>Login</Button>
+            <Button onClick={handleSignup}>Sign Up</Button>
+        
           </>
-          <p>Already have an account? Register here.</p>
-          
           
         </div>
       </Container>
@@ -74,4 +106,4 @@ const LoginOrSignUp = () => {
 }
 
 
-export default LoginOrSignUp;
+export default LoginSignUp;
