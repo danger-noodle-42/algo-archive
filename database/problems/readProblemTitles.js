@@ -7,7 +7,7 @@ const readProblemTitles = async (req, res, next) => {
   const username = req.cookies.username;
   try {
     const queryString = `
-    SELECT title from problems WHERE username=$1;
+    SELECT title FROM problems WHERE username=$1;
     `;
     const values = [username];
     const results = await db.query(queryString, values);
