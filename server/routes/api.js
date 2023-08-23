@@ -3,7 +3,7 @@ const allActions = require('../../database/allActions');
 
 const router = express.Router();
 
-router.post('/createProblem', allActions.createProblem, allActions.verifyToken, (req, res) => {
+router.post('/createProblem', allActions.createProblem, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });
@@ -12,7 +12,7 @@ router.post('/createProblem', allActions.createProblem, allActions.verifyToken, 
   }
 });
 
-router.post('/readProblem', allActions.readProblem, allActions.verifyToken, (req, res) => {
+router.post('/readProblem', allActions.readProblem, (req, res) => {
   const { problem } = res.locals;
   if (problem) {
     res.status(200).json(problem);
@@ -21,7 +21,7 @@ router.post('/readProblem', allActions.readProblem, allActions.verifyToken, (req
   }
 });
 
-router.get('/listProblems', allActions.readProblemTitles, allActions.verifyToken, (req, res) => {
+router.get('/listProblems', allActions.readProblemTitles, (req, res) => {
   const { problemTitles } = res.locals;
   if (problemTitles) {
     res.status(200).json({ titles: problemTitles });
@@ -30,7 +30,7 @@ router.get('/listProblems', allActions.readProblemTitles, allActions.verifyToken
   }
 });
 
-router.patch('/updateProblem', allActions.updateProblem, allActions.verifyToken, (req, res) => {
+router.patch('/updateProblem', allActions.updateProblem, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });
@@ -39,7 +39,7 @@ router.patch('/updateProblem', allActions.updateProblem, allActions.verifyToken,
   }
 });
 
-router.delete('/deleteProblem', allActions.deleteProblem, allActions.verifyToken, (req, res) => {
+router.delete('/deleteProblem', allActions.deleteProblem, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });

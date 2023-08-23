@@ -5,7 +5,8 @@ const db = require('../model');
 //Outputs data in res.locals.successful, and
 //res.locals.problemTitles of format [name1, name2, ...]
 const readProblemTitles = async (req, res, next) => {
-  const { username, tag } = req.body;
+  const { tag } = req.body;
+  const username = req.cookies.username;
   try {
     const queryString = `SELECT title FROM problems WHERE username=$1;`; //the string that SQL is reading to get data
     const values = [username]; //values that will be passed into query
@@ -18,7 +19,7 @@ const readProblemTitles = async (req, res, next) => {
 
     res.locals.problemTitles = results.rows
       .map((e) => e.title)
-      .map((e) => e.trim()); 
+      .map((e) => e.trim());
     res.locals.successsful = true;
 
     return next();

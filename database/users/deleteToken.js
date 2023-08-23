@@ -2,8 +2,9 @@
 
 const deleteToken = (req, res, next) => {
   try {
-    // use res.clearCookie to delete cookie
+    // use res.clearCookie to delete cookies
     res.clearCookie('token');
+    res.clearCookie('username');
     // store success on locals
     res.locals.successful = true;
     // return next()
