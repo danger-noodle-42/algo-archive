@@ -6,11 +6,12 @@ const db = require('../model');
 //Outputs data in res.locals.successful, and
 //res.locals.problem of format { title, description, soution, comments }
 const readProblem = async (req, res, next) => {
+  const { title, username } = req.body
   try {
     const queryString = `
-    SELECT * FROM problems WHERE title=$1;`;
-    
-    let result = await db.query(queryString, [req.body.title]);
+    SELECT * FROM problems WHERE title=$1 AND username=$2;`;
+    const values = [title, username]
+    let result = await db.query(queryString, values);
     result = result.rows[0];
 
     result.title = result.title.trim();
