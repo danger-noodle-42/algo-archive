@@ -6,11 +6,12 @@ const db = require('../model')
 //Outputs data in res.locals.successful
 const createProblem = async (req, res, next) =>{
   try {
-    const { title, description, solution, comments} = req.body;
+    const { username, title, description, solution, comments, tag } = req.body;
   
+    //updated the next few codes to include username and tag
     const queryString = `
-    INSERT INTO problems (title, description, solution, comments)
-    VALUES ('${title}', '${description}', '${solution}', '${comments}');`;
+    INSERT INTO problems (username, title, description, solution, comments, tag) 
+    VALUES ('${username}', '${title}', '${description}', '${solution}', '${comments}', '${tag}');`;
 
     await db.query(queryString);
     res.locals.successful = true;

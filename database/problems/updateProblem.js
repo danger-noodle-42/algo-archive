@@ -7,13 +7,14 @@ const db = require('../model')
 
 const updateProblem = async (req, res, next) =>{
   try {
-    const { title, description, solution, comments} = req.body;
+    //Updated to include tag
+    const { title, description, solution, comments, tag } = req.body;
   
     const queryString = `UPDATE problems
-    SET description = $2, solution = $3, comments = $4
+    SET description = $2, solution = $3, comments = $4, tag = $5
     WHERE title=$1;`;
 
-    await db.query(queryString, [ title, description, solution, comments ]);
+    await db.query(queryString, [ title, description, solution, comments, tag ]);
     res.locals.successful = true;
     
     return next();

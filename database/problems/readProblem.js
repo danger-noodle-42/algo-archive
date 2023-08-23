@@ -17,6 +17,7 @@ const readProblem = async (req, res, next) => {
     result.description = result.description.trim();
     result.solution = result.solution.trim();
     result.comments = result.comments.trim();
+    result.tag = result.tag.trim(); //Added this line of code
 
     res.locals.successful = true;
     res.locals.problem = result;
