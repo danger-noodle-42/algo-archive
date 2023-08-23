@@ -6,6 +6,8 @@ import QuestionsList from './components/QuestionsList.jsx';
 
 const App = () => {
 // STATE HOOKS
+
+// we might need a useState for: login, signUp, and tag
   const [title, setTitle] = useState(title);
   const [description, setDescription] = useState(description);
   const [solution, setSolution] = useState(solution);
@@ -13,9 +15,10 @@ const App = () => {
   const [titleCards, setTitleCards] = useState({titles: []});
 
   // FUNCTION THAT QUERIES DB AND UPDATES STATE
+  // getting list of problems store in DB passing it to the setTitleCards
   const fetchAndUpdateTitles = async () => {
     try {
-      const response = await fetch('api/listProblems'); //we need a router that gets us to the readProblemTitles middleware
+      const response = await fetch('api/listProblems'); //we need a (get) router that gets us to the readProblemTitles middleware
       const titles = await response.json();
       setTitleCards(titles);
     } catch (error) {
@@ -23,6 +26,7 @@ const App = () => {
     }
   };
 
+  //function to update questions
   const handleQuestionUpdate = (field, value) => {
     switch(field) {
       case 'title':
@@ -55,7 +59,7 @@ const App = () => {
         body: JSON.stringify({title: clickedTitle})
       });
       const data = await response.json();
-      const { title, description, solution, comments } = data;
+      const { title, description, solution, comments } = data;//add the tag here? and pass it as prop
       setTitle(title);
       setDescription(description);
       setSolution(solution);
@@ -102,7 +106,8 @@ const App = () => {
       solution,
       comments
     };
-
+    //looking for the title in our list of problems
+    //if the problem is there, update whatever needs to be update
     if(titleCards.titles.includes(title)){
       try {
         await fetch('api/updateProblem', {
@@ -116,6 +121,7 @@ const App = () => {
         console.log('There was an error updating the title', err);
       }
     } 
+    //if the problem is not there, then create it - fetch a post request 
     else {
       try {
         await fetch('api/createProblem', {
@@ -130,17 +136,23 @@ const App = () => {
         console.log('There was an error creating the title', err);
       }
     }
+    //invoke list of problems - a get request
     fetchAndUpdateTitles();
+    //function clears the form
     handleClear(e);
   };
 
 
   
   // LOAD TITLES ON INITIAL PAGE RENDER
+  // get request to pull and render full list of problems. 
+  // the dependency array, so if anything change, invokes useEffect. Bcs it is empty,
+  //it will only run once when page renders
   useEffect(() => {
     fetchAndUpdateTitles();
   }, []);
   
+  //render of the page, we are passing the components and the values as props
   return (
     <div className='App'>
       <QuestionsList value="tbu" title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards}/>
