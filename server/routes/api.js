@@ -74,7 +74,7 @@ router.post('/login', allActions.verifyUser, allActions.createToken, allActions.
 // delete request to '/logout
 router.delete('/logout', allActions.deleteToken, (req, res) => {
   const { successful } = res.locals;
-  if (successful) {
+  if (successful === true) {
     res.status(200).json({ successful });
   } else {
     res.status(400).json({ error: 'Error logging out' });

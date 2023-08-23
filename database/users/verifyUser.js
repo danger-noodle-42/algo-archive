@@ -25,7 +25,7 @@ const verifyUser = async (req, res, next) => {
       // if it doesnt match, return err message
       if (err) return next({err: "incorrect username or password"});
       // store success on locals
-      res.locals.success = true;
+      res.locals.successful = true;
       // else return next after storing username on res.locals
       res.locals.username = username;
       return next()

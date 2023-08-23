@@ -5,7 +5,7 @@ const deleteToken = (req, res, next) => {
     // use res.clearCookie to delete cookie
     res.clearCookie('token');
     // store success on locals
-    res.locals.success = true;
+    res.locals.successful = true;
     // return next()
     return next();
   } catch (err) {
