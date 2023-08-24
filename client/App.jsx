@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
 import CodeViewer from './components/CodeViewer.jsx';
 import QuestionsList from './components/QuestionsList.jsx';
+import TagList from './components/TagList.jsx';
+import TagFilter from './components/TagFilter.jsx';
 import LoginSignUp from './LoginSignup.jsx';
 
 
@@ -12,14 +14,18 @@ const App = () => {
   const [description, setDescription] = useState(description);
   const [solution, setSolution] = useState(solution);
   const [comments, setComments] = useState(comments);
+  const [tag, setTag] = useState(tag);
   const [titleCards, setTitleCards] = useState({titles: []});
+  const [expandFilters, setExpandFilters] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState(selectedFilter);
   const [user, setUser] = useState();
   const [isLogin, setIsLogin] = useState(false)
 
   // FUNCTION THAT QUERIES DB AND UPDATES STATE
   const fetchAndUpdateTitles = async () => {
     try {
-      const response = await fetch('api/listProblems'); //we need a router that gets us to the readProblemTitles middleware
+      // add selected filter tag to req param
+      const response = await fetch('api/listProblems/' + selectedFilter);
       const titles = await response.json();
       setTitleCards(titles);
     } catch (error) {
@@ -41,6 +47,8 @@ const App = () => {
       case 'comments':
         setComments(value);
         break;
+      case 'tag':
+        setTag(value);
       default:
         break;
     }
@@ -59,11 +67,12 @@ const App = () => {
         body: JSON.stringify({title: clickedTitle})
       });
       const data = await response.json();
-      const { title, description, solution, comments } = data;
+      const { title, description, solution, comments, tag } = data;
       setTitle(title);
       setDescription(description);
       setSolution(solution);
       setComments(comments);
+      setTag(tag);
     }
     catch (error) {
       console.log('There was an error accessing the data: ', error)
@@ -94,6 +103,7 @@ const App = () => {
     setDescription('');
     setSolution('');
     setComments('');
+    setTag('');
   };
 
   //FUNCTION THAT ADDS A NEW PROBLEM
@@ -104,7 +114,8 @@ const App = () => {
       title,
       description,
       solution,
-      comments
+      comments,
+      tag
     };
 
     if(titleCards.titles.includes(title)){
@@ -138,6 +149,39 @@ const App = () => {
     handleClear(e);
   };
 
+  // FUNCTION THAT SENDS LOG OUT REQUEST
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('api/logout', {
+        method: 'DELETE',
+      });
+      // TODO: does anything else need to happen on this in the front end? or is it all handled in the backend? redirect to login screen?
+
+    } catch (error) {
+      console.error('Error logging out: ', error);
+    }
+  }
+
+  // FUNCTION THAT EXPANDS AND CONTRACTS FILTERS
+  const handleFilterExpand = () => {
+    setExpandFilters(!expandFilters);
+  }
+
+  // FUNCTION THAT TRACKS CURRENTLY SELECTED FILTER RADIO BUTTON
+  const handleFilterSelection = (value) => {
+    setSelectedFilter(value);
+  }
+
+  // FUNCTION THAT SUBMITS TAG FILTER CHOICE
+  const handleFilterSubmit = async () => {
+    fetchAndUpdateTitles();
+  }
+
+  // FUNCTION THAT CLEARS TAG FILTER CHOICE
+  const handleFilterClear = () => {
+    setSelectedFilter('');
+  }
+
 
   
   // LOAD TITLES ON INITIAL PAGE RENDER
@@ -154,7 +198,18 @@ const App = () => {
               element={
                 isLogin ? (
                   <div className='App'>
-                    <QuestionsList title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards} />
+                    <div className='left-panel'>
+                      <button className='add-challenge' onClick={(e) => handleClear(e)}>Add a Challenge</button>
+                      <TagFilter 
+                        expandFilters = {expandFilters} 
+                        selectedFilter = {selectedFilter}
+                        handleFilterExpand = {handleFilterExpand}
+                        handleFilterSubmit = {handleFilterSubmit}
+                        handleFilterReset = {handleFilterClear}
+                        onChange = {handleFilterSelection}
+                      />
+                      <QuestionsList title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards} />
+                    </div>
                     <CodeViewer title={title}
                       description={description}
                       solution={solution}
@@ -164,7 +219,14 @@ const App = () => {
                       onChange={handleQuestionUpdate}        
                       handleAddTitle={handleAddTitle}
                     />
+                  <div className='right-panel'>
+                    <button className='logout' onClick={handleLogout}>Log out</button>
+                    <TagList 
+                      tag = {tag}
+                      onChange = {handleQuestionUpdate}
+                    />
                   </div>
+                </div>
                 ) : (
                   <Navigate replace to={'/login'}/>
                 )
@@ -185,10 +247,11 @@ const App = () => {
                       handleAccessDataClick={handleAccessDataClick}
                       onChange={handleQuestionUpdate}        
                       handleAddTitle={handleAddTitle}
-                    />
-                  </div>
+                    /> 
+                    </div>
                 )
-              }/>
+              }
+              />
           </Routes>
         </div>
     </Router>

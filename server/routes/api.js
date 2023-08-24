@@ -3,8 +3,7 @@ const allActions = require('../../database/allActions');
 
 const router = express.Router();
 
-//
-router.post('/createProblem', allActions.createProblem, allActions.verifyToken, (req, res) => {
+router.post('/createProblem', allActions.createProblem, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     console.log('The API is sucessful')
@@ -53,7 +52,7 @@ router.delete('/deleteProblem', allActions.deleteProblem, (req, res) => {
 
 
 // post request to '/signup'
-router.post('/signup', allActions.createUser, allActions.createToken, (req, res) => {
+router.post('/signup', allActions.createUser, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });
@@ -64,7 +63,7 @@ router.post('/signup', allActions.createUser, allActions.createToken, (req, res)
 })
 
 // post request to '/login'
-router.post('/login', allActions.verifyUser, allActions.createToken, allActions.verifyToken, (req, res) => {
+router.post('/login', allActions.verifyUser, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });
