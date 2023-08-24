@@ -6,6 +6,9 @@ import '../style.css';
 import './CodeViewer.css';
 
 
+
+
+
 // this seems to be the code to handle the form in the middle of the page. We are passing the props(objects)
 // from App.jsx here to be able to render the functionality
 
@@ -29,7 +32,7 @@ const CodeViewer = ((props) => {
   <form onSubmit={handleAddTitle} className='codeViewer'>
     <label className='title'>
       Challenge Title
-      <Input
+      <TextArea
         type='text'
         value={title}
         onChange={(e) => onChange('title', e.target.value)}

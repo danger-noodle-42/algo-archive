@@ -1,11 +1,9 @@
 import React from 'react';
 import '../style.css';
 // import './TagFilter.css';
+import { Button, Input, TextArea, ButtonContainer } from './Inputs.jsx';
 import styled from '@emotion/styled';
 
-
-const TextArea = styled.textarea``;
-const Input = styled.input``;
 
 const TagFilter = ((props) => {
 
@@ -19,7 +17,7 @@ const TagFilter = ((props) => {
   } = props;
 
   // switch statement which uses tag state property to determine which radio button should be selected when a problem is opened
-  let recursionChecked, oopChecked, closureChecked, hofChecked, llChecked, asyncChecked, bstChecked = false;
+  let recursionChecked, oopChecked, closureChecked, hofChecked, llChecked, asyncChecked, bstChecked, otherChecked = false;
   switch(selectedFilter) {
     case 'recursion': 
         recursionChecked = true;
@@ -42,6 +40,9 @@ const TagFilter = ((props) => {
     case 'bst': 
         bstChecked = true;
         break;
+    case 'other':
+        otherChecked = true;
+        break;
     default:
         break;
     
@@ -60,7 +61,6 @@ const TagFilter = ((props) => {
     return (
             <div className="showing-filters">
                 <button className="show-filters" onClick={handleFilterExpand}>Show/Hide Filters</button>
-                {/* <form className="tag-filters"> */}
                     <fieldset>
                         <legend>Choose a tag:</legend>
 
@@ -98,10 +98,13 @@ const TagFilter = ((props) => {
                             <input type="radio" id="bst-tag" name="tag-radio" value="bst" checked={bstChecked} onChange={(e) => onChange(e.target.value)} />
                             <label for="bst-tag">Binary Search Tree (BST)</label>
                         </div>
-                        <button className="filter-submit" onClick={handleFilterSubmit}>Confirm Filter</button>
+                        
+                        <div>
+                            <input type="radio" id="other-tag" name="tag-radio" value="other" checked={otherChecked} onChange={(e) => onChange(e.target.value)} />
+                            <label for="bst-tag">Other</label>
+                        </div>
                     </fieldset>
-                {/* </form> */}
-                <button className="filter-clear" onClick={handleFilterClear}>Clear Filter</button>
+                <Button className="filter-clear" onClick={handleFilterClear} variant="secondary">Clear Filter</Button>
             </div>
         )
   }

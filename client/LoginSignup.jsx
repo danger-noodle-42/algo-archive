@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { Button, Input } from './components/Inputs.jsx';
+import { Button, Input, ButtonContainer } from './components/Inputs.jsx';
 import LogoAsset from './assets/logo.png'
 
 const OuterContainer = styled.div`
@@ -48,12 +48,12 @@ const Form = styled.form`
   height: 100px;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 40px;
-  width: 100%;
-`;
+// const ButtonContainer = styled.div`
+//   display: flex;
+//   justify-content: space-evenly;
+//   margin-top: 40px;
+//   width: 100%;
+// `;
 
 const ErrorMessage = styled.div`
   color: red;

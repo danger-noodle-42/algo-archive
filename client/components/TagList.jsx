@@ -2,6 +2,9 @@ import React from 'react';
 import '../style.css';
 import './TagList.css';
 import styled from '@emotion/styled';
+import { Button, Input } from './Inputs.jsx';
+// import OuterContainer from '../LoginSignup.jsx';
+
 
 // this seems to be the code to handle the form in the middle of the page. We are passing the props(objects)
 // from App.jsx here to be able to render the functionality
@@ -9,6 +12,8 @@ import styled from '@emotion/styled';
 // we don't need TextArea or Input for TagList, but keeping for now for styled-component reference
 // const TextArea = styled.textarea``;
 // const Input = styled.input``;
+
+
 
 const TagList = ((props) => {
 
@@ -19,7 +24,7 @@ const TagList = ((props) => {
   } = props;
 
   // switch statement which uses tag state property to determine which radio button should be selected when a problem is opened
-  let recursionChecked, oopChecked, closureChecked, hofChecked, llChecked, asyncChecked, bstChecked = false;
+  let recursionChecked, oopChecked, closureChecked, hofChecked, llChecked, asyncChecked, bstChecked, otherChecked = false;
   switch(tag) {
     case 'recursion': 
         recursionChecked = true;
@@ -41,6 +46,9 @@ const TagList = ((props) => {
         break;
     case 'bst': 
         bstChecked = true;
+        break;
+    case 'other':
+        otherChecked = true;
         break;
     default:
         break;
@@ -86,6 +94,11 @@ const TagList = ((props) => {
         <div>
             <input type="radio" id="bst-tag" name="tag-radio" value="bst" checked={bstChecked} onChange={(e) => onChange('tag', e.target.value)} />
             <label htmlFor="bst-tag">Binary Search Tree (BST)</label>
+        </div>
+
+        <div>
+            <input type="radio" id="other-tag" name="tag-radio" value="other" checked={otherChecked} onChange={(e) => onChange('tag', e.target.value)} />
+            <label htmlFor="other-tag">Other</label>
         </div>
     </fieldset>
   )

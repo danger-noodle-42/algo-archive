@@ -5,10 +5,10 @@
     flex-direction: row;
     justify-content: space-between;
     margin: 5px;
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Lato', sans-serif;
   }
   
   .title-Card > .title-button {
     flex-grow: 1;
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Lato', sans-serif;
   }
