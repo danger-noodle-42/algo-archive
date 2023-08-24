@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  useNavigate,
   Navigate,
 } from 'react-router-dom';
 import CodeViewer from './components/CodeViewer.jsx';
@@ -11,6 +12,8 @@ import QuestionsList from './components/QuestionsList.jsx';
 import TagList from './components/TagList.jsx';
 import TagFilter from './components/TagFilter.jsx';
 import LoginSignUp from './LoginSignup.jsx';
+import { Button, Input } from './components/Inputs.jsx';
+
 
 const App = () => {
   // STATE HOOKS
@@ -160,6 +163,7 @@ const App = () => {
         method: 'DELETE',
       });
       // TODO: does anything else need to happen on this in the front end? or is it all handled in the backend? redirect to login screen?
+      setIsLogin(false);
     } catch (error) {
       console.error('Error logging out: ', error);
     }
@@ -196,7 +200,7 @@ const App = () => {
     if (isLogin) {
       fetchAndUpdateTitles();
     }
-  }, [isLogin]);
+  }, [isLogin, selectedFilter]);
 
   return (
     <Router>
@@ -269,7 +273,7 @@ const App = () => {
                       handleAddTitle={handleAddTitle}
                     />
                   <div className='right-panel'>
-                    <button className='logout' onClick={handleLogout}>Log out</button>
+                    <Button onClick={handleLogout} variant="primary">Log out</Button>
                     <TagList 
                       tag = {tag}
                       onChange = {handleQuestionUpdate}

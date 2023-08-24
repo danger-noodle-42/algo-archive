@@ -4,7 +4,8 @@ textarea {
   height: 100%;
   width: calc(100% - 10px);
   resize: none;
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Lato', sans-serif;
+  font-size: 16;
   padding: 5px;
   border-width: 1px;
   border-radius: 15px;
