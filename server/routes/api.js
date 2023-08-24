@@ -3,11 +3,14 @@ const allActions = require('../../database/allActions');
 
 const router = express.Router();
 
-router.post('/createProblem', allActions.createProblem, (req, res) => {
+//
+router.post('/createProblem', allActions.createProblem, allActions.verifyToken, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
+    console.log('The API is sucessful')
     res.status(200).json({ successful });
   } else {
+    console.log('The API is marking an error')
     res.status(400).json({ error: 'Error creating problem' });
   }
 });
