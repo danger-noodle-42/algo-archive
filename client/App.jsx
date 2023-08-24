@@ -153,8 +153,18 @@ const App = () => {
               path="/"
               element={
                 isLogin ? (
-                  <QuestionsList />,
-                  <CodeViewer />
+                  <div className='App'>
+                    <QuestionsList title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards} />
+                    <CodeViewer title={title}
+                      description={description}
+                      solution={solution}
+                      comments ={comments}
+                      handleClear={handleClear}
+                      handleAccessDataClick={handleAccessDataClick}
+                      onChange={handleQuestionUpdate}        
+                      handleAddTitle={handleAddTitle}
+                    />
+                  </div>
                 ) : (
                   <Navigate replace to={'/login'}/>
                 )
@@ -163,10 +173,20 @@ const App = () => {
               path="/login"
               element={
                 !isLogin ? (
-                  < LoginSignUp logIn={setIsLogin} />
+                  < LoginSignUp onLogin={setIsLogin} />
                 ) : (
-                  <QuestionsList />,
-                  <CodeViewer/>
+                  <div className='App'>
+                    <QuestionsList title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards} />
+                    <CodeViewer  title={title}
+                      description={description}
+                      solution={solution}
+                      comments ={comments}
+                      handleClear={handleClear}
+                      handleAccessDataClick={handleAccessDataClick}
+                      onChange={handleQuestionUpdate}        
+                      handleAddTitle={handleAddTitle}
+                    />
+                  </div>
                 )
               }/>
           </Routes>
