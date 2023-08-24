@@ -26,6 +26,7 @@ router.post('/readProblem', allActions.readProblem, (req, res) => {
 router.post('/listProblems', allActions.readProblemTitles, (req, res) => {
   const { problemTitles } = res.locals;
   if (problemTitles) {
+    console.log('about to send back problemTitles: ', problemTitles);
     res.status(200).json({ titles: problemTitles });
   } else {
     res.status(400).json({ error: 'Error reading problem' });

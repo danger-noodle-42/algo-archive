@@ -55,37 +55,37 @@ const TagList = ((props) => {
 
         <div>
             <input type="radio" id="recursion-tag" name="tag-radio" value="recursion" checked={recursionChecked} onChange={(e) => onChange('tag', e.target.value)} />
-            <label for="recursion-tag">Recursion</label>
+            <label htmlFor="recursion-tag">Recursion</label>
         </div>
 
         <div>
             <input type="radio" id="oop-tag" name="tag-radio" value="oop" checked={oopChecked} onChange={(e) => onChange('tag', e.target.value)} />
-            <label for="oop-tag">Object Oriented Programming (OOP)</label>
+            <label htmlFor="oop-tag">Object Oriented Programming (OOP)</label>
         </div>
 
         <div>
             <input type="radio" id="closure-tag" name="tag-radio" value="closure" checked={closureChecked} onChange={(e) => onChange('tag', e.target.value)} />
-            <label for="closure-tag">Closure</label>
+            <label htmlFor="closure-tag">Closure</label>
         </div>
 
         <div>
             <input type="radio" id="hof-tag" name="tag-radio" value="hof" checked={hofChecked} onChange={(e) => onChange('tag', e.target.value)} />
-            <label for="hof-tag">Higher Order Function</label>
+            <label htmlFor="hof-tag">Higher Order Function</label>
         </div>
 
         <div>
             <input type="radio" id="ll-tag" name="tag-radio" value="ll" checked={llChecked} onChange={(e) => onChange('tag', e.target.value)} />
-            <label for="ll-tag">Linked List</label>
+            <label htmlFor="ll-tag">Linked List</label>
         </div>
 
         <div>
             <input type="radio" id="async-tag" name="tag-radio" value="async" checked={asyncChecked} onChange={(e) => onChange('tag', e.target.value)} />
-            <label for="async-tag">Async</label>
+            <label htmlFor="async-tag">Async</label>
         </div>
 
         <div>
             <input type="radio" id="bst-tag" name="tag-radio" value="bst" checked={bstChecked} onChange={(e) => onChange('tag', e.target.value)} />
-            <label for="bst-tag">Binary Search Tree (BST)</label>
+            <label htmlFor="bst-tag">Binary Search Tree (BST)</label>
         </div>
     </fieldset>
   )
