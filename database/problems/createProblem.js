@@ -6,7 +6,10 @@ const db = require('../model')
 //Outputs data in res.locals.successful
 const createProblem = async (req, res, next) =>{
   try {
-    const { username, title, description, solution, comments, tag } = req.body;
+    // get details from req.body
+    const { title, description, solution, comments, tag } = req.body;
+    // get username from cookie
+    const username = req.cookies.username;
   
     //updated the next few codes to include username and tag
     const queryString = `
