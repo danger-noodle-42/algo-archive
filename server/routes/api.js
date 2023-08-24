@@ -64,7 +64,7 @@ router.post('/signup', allActions.createUser, (req, res) => {
 })
 
 // post request to '/login'
-router.post('/login', allActions.verifyUser, allActions.createToken, (req, res) => {
+router.post('/login', allActions.verifyUser, allActions.createToken, allActions.verifyToken, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });

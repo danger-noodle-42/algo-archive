@@ -14,8 +14,8 @@ const readProblemTitles = async (req, res, next) => {
     let queryString = `SELECT title FROM problems WHERE username=$1`; //the string that SQL is reading to get data
     const values = [username]; //values that will be passed into query
     console.log('values: ', values)
-    if (tag) {
-      queryString += ' AND tag = $2'; //concatenating the queryStr if a tag
+    if (tag !== undefined) {
+      queryString += ` AND tag = $2`; //concatenating the queryStr if a tag
       values.push(tag); //add the tag to the values array
       console.log('values', values)
     }
