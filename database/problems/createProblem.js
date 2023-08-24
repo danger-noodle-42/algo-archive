@@ -15,7 +15,7 @@ const createProblem = async (req, res, next) =>{
 
     await db.query(queryString);
     res.locals.successful = true;
-    
+    console.log('res.locals.successful: ', res.locals.successful)
     return next();
   }
   catch (e){
