@@ -16,7 +16,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', apiRouter);
 // catch-all route handler for any requests to an unknown route
-app.use('/', express.static(path.join(__dirname, '../client')));
+// app.use('/', express.static(path.join(__dirname, '../client')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 app.use((req, res) =>
   res.status(404).send("This is not the page you're looking for...")
 );

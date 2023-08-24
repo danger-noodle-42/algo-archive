@@ -23,7 +23,7 @@ router.post('/readProblem', allActions.readProblem, (req, res) => {
   }
 });
 
-router.get('/listProblems', allActions.readProblemTitles, (req, res) => {
+router.post('/listProblems', allActions.readProblemTitles, (req, res) => {
   const { problemTitles } = res.locals;
   if (problemTitles) {
     res.status(200).json({ titles: problemTitles });
@@ -63,7 +63,7 @@ router.post('/signup', allActions.createUser, (req, res) => {
 })
 
 // post request to '/login'
-router.post('/login', allActions.verifyUser, (req, res) => {
+router.post('/login', allActions.verifyUser, allActions.createToken, allActions.verifyToken, (req, res) => {
   const { successful } = res.locals;
   if (successful) {
     res.status(200).json({ successful });
