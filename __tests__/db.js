@@ -1,8 +1,9 @@
-// mockDb.js
-class MockDb {
-  async query(queryString) {
-    // Simulate database query behavior
-  }
-}
+const fs = require('fs');
+const path = require('path');
+const db = require('./database/model.js');
 
-module.exports = new MockDb();
+const testJsonFile = path.resolve(__dirname, './database/db.test.json');
+
+const { dbConnection } = require('./sensitive'); //Imports the db connection
+
+
