@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, TextArea } from './Inputs.jsx';
+import { Button, Input, TextArea } from './Inputs.jsx';
 
 // TODO Delete CSS and use styled-components instead
 import '../style.css';
@@ -61,8 +61,8 @@ const CodeViewer = ((props) => {
     </label>
 
     <div className='buttons'>
-      <button className="clear" title={title} onClick={handleClear}> Clear </button>
-      <button type='submit'>Submit</button>
+      <Button onClick={handleClear} variant="secondary">Clear</Button>
+      <Button type='submit' variant="primary">Submit</Button>
     </div>
   </form>
   )
