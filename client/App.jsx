@@ -14,18 +14,23 @@ const App = () => {
   const [description, setDescription] = useState(description);
   const [solution, setSolution] = useState(solution);
   const [comments, setComments] = useState(comments);
-  const [tag, setTag] = useState(tag);
+  const [tag, setTag] = useState('');
   const [titleCards, setTitleCards] = useState({titles: []});
   const [expandFilters, setExpandFilters] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState(selectedFilter);
+  const [selectedFilter, setSelectedFilter] = useState('');
   const [user, setUser] = useState();
   const [isLogin, setIsLogin] = useState(false)
 
   // FUNCTION THAT QUERIES DB AND UPDATES STATE
   const fetchAndUpdateTitles = async () => {
     try {
-      // add selected filter tag to req param
-      const response = await fetch('api/listProblems/' + selectedFilter);
+      console.log('tag: ', selectedFilter);
+      // add selected filter tag to req body
+      const response = await fetch('api/listProblems', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({'tag': selectedFilter})
+        });
       const titles = await response.json();
       setTitleCards(titles);
     } catch (error) {
@@ -106,7 +111,7 @@ const App = () => {
     setTag('');
   };
 
-  //FUNCTION THAT ADDS A NEW PROBLEM
+  //FUNCTION THAT ADDS AND/OR UPDATES A NEW PROBLEM
   const handleAddTitle = async (e) => {
     e.preventDefault();
 
@@ -169,17 +174,21 @@ const App = () => {
 
   // FUNCTION THAT TRACKS CURRENTLY SELECTED FILTER RADIO BUTTON
   const handleFilterSelection = (value) => {
+    console.log('filter value: ', value);
     setSelectedFilter(value);
+    console.log('selectedFilter: ', selectedFilter);
   }
 
   // FUNCTION THAT SUBMITS TAG FILTER CHOICE
-  const handleFilterSubmit = async () => {
+  const handleFilterSubmit = () => {
+    console.log('in handleFilterSubmit, about to do fetchAndUpdateTitles');
     fetchAndUpdateTitles();
   }
 
   // FUNCTION THAT CLEARS TAG FILTER CHOICE
   const handleFilterClear = () => {
     setSelectedFilter('');
+    fetchAndUpdateTitles();
   }
 
 
@@ -205,10 +214,10 @@ const App = () => {
                         selectedFilter = {selectedFilter}
                         handleFilterExpand = {handleFilterExpand}
                         handleFilterSubmit = {handleFilterSubmit}
-                        handleFilterReset = {handleFilterClear}
+                        handleFilterClear = {handleFilterClear}
                         onChange = {handleFilterSelection}
                       />
-                      <QuestionsList title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards} />
+                      <QuestionsList tag={tag} title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards} />
                     </div>
                     <CodeViewer title={title}
                       description={description}
@@ -238,8 +247,19 @@ const App = () => {
                   < LoginSignUp onLogin={setIsLogin} />
                 ) : (
                   <div className='App'>
-                    <QuestionsList title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards} />
-                    <CodeViewer  title={title}
+                    <div className='left-panel'>
+                      <button className='add-challenge' onClick={(e) => handleClear(e)}>Add a Challenge</button>
+                      <TagFilter 
+                        expandFilters = {expandFilters} 
+                        selectedFilter = {selectedFilter}
+                        handleFilterExpand = {handleFilterExpand}
+                        handleFilterSubmit = {handleFilterSubmit}
+                        handleFilterClear = {handleFilterClear}
+                        onChange = {handleFilterSelection}
+                      />
+                      <QuestionsList tag={tag} title={title} handleDeleteClick={handleDeleteClick} handleAccessDataClick={handleAccessDataClick} titleCards={titleCards} />
+                    </div>
+                    <CodeViewer title={title}
                       description={description}
                       solution={solution}
                       comments ={comments}
@@ -247,8 +267,15 @@ const App = () => {
                       handleAccessDataClick={handleAccessDataClick}
                       onChange={handleQuestionUpdate}        
                       handleAddTitle={handleAddTitle}
-                    /> 
-                    </div>
+                    />
+                  <div className='right-panel'>
+                    <button className='logout' onClick={handleLogout}>Log out</button>
+                    <TagList 
+                      tag = {tag}
+                      onChange = {handleQuestionUpdate}
+                    />
+                  </div>
+                </div>
                 )
               }
               />

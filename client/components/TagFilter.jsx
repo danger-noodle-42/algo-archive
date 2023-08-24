@@ -60,7 +60,7 @@ const TagFilter = ((props) => {
     return (
             <div className="showing-filters">
                 <button className="show-filters" onClick={handleFilterExpand}>Show/Hide Filters</button>
-                <form onSubmit={handleFilterSubmit} className="tag-filters">
+                {/* <form className="tag-filters"> */}
                     <fieldset>
                         <legend>Choose a tag:</legend>
 
@@ -98,9 +98,9 @@ const TagFilter = ((props) => {
                             <input type="radio" id="bst-tag" name="tag-radio" value="bst" checked={bstChecked} onChange={(e) => onChange(e.target.value)} />
                             <label for="bst-tag">Binary Search Tree (BST)</label>
                         </div>
-                        <button className="filter-submit" type="submit">Confirm Filter</button>
+                        <button className="filter-submit" onClick={handleFilterSubmit}>Confirm Filter</button>
                     </fieldset>
-                </form>
+                {/* </form> */}
                 <button className="filter-clear" onClick={handleFilterClear}>Clear Filter</button>
             </div>
         )

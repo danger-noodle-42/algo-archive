@@ -1,12 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import TitleCard from './TitleCard.jsx';
+import TagFilter from './TagFilter.jsx';
+import TagList from './TagList.jsx';
 import '../style.css';
 import './QuestionsList.css';
 
 
 const QuestionsList = (props) => {
-  const { title, titleCards, handleDeleteClick, handleAccessDataClick } = props;
+  const { tag, title, titleCards, handleDeleteClick, handleAccessDataClick } = props;
 
   /*
   Takes in the following props from its parent App:
@@ -24,6 +26,7 @@ const QuestionsList = (props) => {
         <TitleCard
           key={title} 
           title={title}
+          tag={tag}
           handleAccessDataClick={handleAccessDataClick}
           handleDeleteClick={handleDeleteClick}
         />
